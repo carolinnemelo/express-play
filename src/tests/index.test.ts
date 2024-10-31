@@ -11,3 +11,5 @@ test("GET /status", async () => {
   deepEqual(result.status, 200)
   deepEqual(result.body, { status: "ready" });
 });
+
+
