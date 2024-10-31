@@ -1,7 +1,7 @@
 import { deepEqual } from "node:assert";
 import request  from "supertest";
 import test from "node:test";
-import { createApp } from ".";
+import { createApp } from "./app";
 
 
 test("GET /status", async () => {
