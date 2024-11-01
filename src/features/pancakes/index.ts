@@ -1,8 +1,10 @@
 import express from "express";
 
+type Pancake = unknown;
+
 type Db = {
-  getAll: () => Promise<[]>
-} //don't use inline any
+  getAll: () => Promise<Pancake[]>;
+}; //don't use inline any
 
 export function createPancakesFeature(db: Db) {
   //could start the db here to make it here first
@@ -17,7 +19,9 @@ export function createPancakesFeature(db: Db) {
 
       });
 
-
+      router.post("/", async (req, res) => {
+        res.json({ id: -1 }); 
+      });
       return router;
     },
   }; //all functions inside an object
