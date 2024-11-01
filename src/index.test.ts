@@ -23,10 +23,14 @@ test("GET /api/v1/pancakes", async () => {
 
 test("POST /api/v1/pancakes", async () => {
   const app = createApp(); // if you have the app inside every test, that means that they are isolated
-
-  const result = await request(app)
+  
+  const postResult = await request(app)
     .post("/api/v1/pancakes")
     .send({ layers: [] });
+  
+  const getResult = await request(app).get("/api/v1/pancakes");
 
-  deepEqual(result.status, 201);
+  deepEqual(postResult.status, 201);
+  deepEqual(getResult.body, [{ layers: [] }]);
 });
+

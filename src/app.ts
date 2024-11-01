@@ -1,8 +1,9 @@
 import express from "express";
-import { createPancakesFeature } from "./features/pancakes";
+import { createPancakesFeature, Db, Pancake } from "./features/pancakes";
 
-function createDb() {
-  return { getAll: async () => [] };
+function createDb(): Db {
+  const Data = [];
+  return { getAll: async () => [], cookPancake: async (pancake: Pancake) => {} };
 }
 export function createApp() {
   //for your functions don't use create. prepare pancakes, use natural language. Ubiquitous language

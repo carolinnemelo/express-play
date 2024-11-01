@@ -1,17 +1,18 @@
 import express from "express";
 import { v4 } from "uuid";
 
-type PancakeLayer = {
+export type PancakeLayer = {
   content: string;
 };
 
-type Pancake = {
+export type Pancake = {
   id: string;
   layers: PancakeLayer[];
 };
 
-type Db = {
+export type Db = {
   getAll: () => Promise<Pancake[]>;
+  cookPancake: (pancake: Pancake) => Promise<void>;
 }; //don't use inline any
 
 export function createPancakesFeature(db: Db) {
@@ -29,9 +30,11 @@ export function createPancakesFeature(db: Db) {
 
       router.post("/", async (req, res) => {
         const { layers } = req.body;
+        const id = v4();
+        const pancake = { id, layers };
 
-        const id = v4()
-        
+        await db.cookPancake(pancake);
+
         res.status(201).json({ id: id }); 
       });
       return router;
