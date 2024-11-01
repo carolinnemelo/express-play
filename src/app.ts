@@ -1,15 +1,20 @@
 import express from "express";
-import { createPancakesFeature } from "./features";
+import { createPancakesFeature } from "./features/pancakes";
+
 
 export function createApp() {
+  //for your functions don't use create. prepare pancakes, use natural language. Ubiquitous language
   const app = express();
 
   app.get("/status", (req, res) => {
     res.json({ status: "ready" });
   });
-  const pancakesFeature = createPancakesFeature();
+
+  const db = { getAll: async () => [] }; //as this grows can create a new file
+
+  const pancakesFeature = createPancakesFeature(db);
   app.use("/api/v1/pancakes", pancakesFeature.getRouter());
-  app.use("/api/v1/pankcakes", pancakesFeature.getRouter()); //ter duas rotas quando tem algum erro escrito pq vai quebrar pra todo mundo que ja usa o app
 
   return app;
 }
+
