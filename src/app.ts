@@ -8,6 +8,8 @@ export function createApp() {
   //for your functions don't use create. prepare pancakes, use natural language. Ubiquitous language
   const app = express();
 
+  app.use(express.json())
+
   app.get("/status", (req, res) => {
     res.json({ status: "ready" });
   });
